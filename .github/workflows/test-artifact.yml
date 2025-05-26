@@ -1,0 +1,17 @@
+name: Upload Test Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create dummy file
+        run: echo "test" > test.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: test-artifact
+          path: test.txt
