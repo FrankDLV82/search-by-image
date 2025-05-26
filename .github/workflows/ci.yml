@@ -23,7 +23,7 @@ jobs:
         run: npm run build:prod:zip:chrome
 
       - name: Upload built ZIP
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: search-by-image-chrome
           path: '**/*.zip'
