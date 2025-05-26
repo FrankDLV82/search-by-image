@@ -1,4 +1,4 @@
-name: Build Chrome Extension ZIP
+name: Manual Build - Base64 Output
 
 on:
   workflow_dispatch:
@@ -19,11 +19,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build production ZIP for Chrome
+      - name: Build extension (Chrome)
         run: npm run build:prod:zip:chrome
 
-      - name: Upload built ZIP
-        uses: actions/upload-artifact@v3.1.3
-        with:
-          name: search-by-image-chrome
-          path: '**/*.zip'
+      - name: List ZIPs
+        run: |
+          echo "🔍 Looking for ZIP files..."
+          find . -type f -name "*.zip"
+
+      - name: Encode the ZIP file to base64
+        run: |
+          echo "📦 Encoding the ZIP file..."
+          ZIP_PATH=$(find . -type f -name "*.zip" | head -n 1)
+          echo "Found ZIP at: $ZIP_PATH"
+          echo "-----BEGIN BASE64-----"
